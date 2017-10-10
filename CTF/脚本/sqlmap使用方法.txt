@@ -1,0 +1,26 @@
+sqlmap命令教程
+-p    		指定测试参数
+-b 		获取banner
+--dbs		例句数据库
+--is-dbs	书否是管理员权限
+--current-db	当前数据库
+--current-user 	当前用户
+--tables	列举数据库的表名
+--count		检索所有条目数
+--columns	获取表的列名
+--dump		获取表中的数据，包含列
+--dump-all	转存dbms数据库所有项目
+--level		测试等级（1-5），默认为1
+-v		显示详细信息
+
+读取数据库--》读取表--》读取表的列--》获取内容
+-D	指定数据库
+-T	指定表
+-C	指定列
+--dbms=mysql oracle mssql 指定数据库
+
+
+--os-shell获得控制权限
+
+打开3389端口可以进行远程登陆
+

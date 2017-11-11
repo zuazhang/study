@@ -28,9 +28,29 @@ else:
 
 #下面是一个简单的例子，打开一个文件在文件中写入内容，但文件没有写入权限
 #发生异常
+'''
+try:
+	fh = open("testfile","r")
+	fh.write("this is my test file exception handing!!!")
+except IOError:
+	print "error: can\'t fine file or read data"
+else:
+	print "written content in the file successfully"
+'''
 
-
-
+#可以不带任何异常类型使用except，也可以带多种异常类型
+#try-finally语句
+'''
+你可以使用except语句或者finally语句，但是两者不能同时使用
+else语句也不能与finally语句同时使用
+'''
+#try-finally语句实例
+try:
+	fh = open("testfile","w")
+	fh.write("this is my test file foer exception handing!!")
+finally:#退出时总会执行
+	print "Error: can\'t find file or read data "
+	
 
 
 

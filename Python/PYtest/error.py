@@ -14,6 +14,30 @@ python提供了两个非常重要的功能来处理python程序在运行中出现的异常和错误
 该语句用来检测try语句中的错误，从而让except语句捕获异常信息并处理
 
 '''
+#下面是个简单的例子，他打开一个文件，在文件写入内容，且并未发生异常
+'''
+try:
+	fh = open("testfile","w")
+	fh.write("this is my test file for exception handing!!!")
+except IOError:
+	print "ERROR: can\'t find file or read data"
+else:
+	print "written content in the file successfully"
+	fh.close()
+'''
+
+#下面是一个简单的例子，打开一个文件在文件中写入内容，但文件没有写入权限
+#发生异常
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -53,7 +53,9 @@ finally:#退出时总会执行
 	print "Error: can\'t find file or read data "
 '''
 #同样的例子可以写成如下形式
-
+#当在try块中抛出一个异常，以及执行finally块代码
+#finall块中的代码执行后，异常被再次提出，并执行except代码
+'''
 try:
 	fh = open("testfile","w")
 	try:
@@ -63,9 +65,26 @@ try:
 		fh.close()
 except IOError:
 	print "Error : can\'t find file or read data "
+'''
 
 
-
+#异常的参数
+'''
+一个异常可以带上参数，可作为输出的异常信息参数
+可以使用except语句来捕获异常的参数
+变量接受的异常值通产包含在异常的语句中。
+在元祖的表单中变量可以接受一个或者多个值
+元祖通常包含错误字符串，错误数字，错误位置
+'''
+#以下为单个异常的实例
+#在这里定义一个函数
+def temp_convert(var):
+	try:
+		return int(var)
+	except ValueError,Argument:
+		print "the argument does not contain numbers\n",Argument
+#调用函数
+temp_convert("xyz");
 
 
 

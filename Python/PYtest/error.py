@@ -45,11 +45,32 @@ else:
 else语句也不能与finally语句同时使用
 '''
 #try-finally语句实例
+'''
 try:
 	fh = open("testfile","w")
 	fh.write("this is my test file foer exception handing!!")
 finally:#退出时总会执行
 	print "Error: can\'t find file or read data "
+'''
+#同样的例子可以写成如下形式
+
+try:
+	fh = open("testfile","w")
+	try:
+		fh.write("this is my test file for exception handing !!")
+	finally:
+		print "going to close the file "
+		fh.close()
+except IOError:
+	print "Error : can\'t find file or read data "
+
+
+
+
+
+
+
+
 	
 
 

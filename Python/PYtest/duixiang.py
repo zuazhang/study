@@ -155,6 +155,64 @@ c.parentMethod()   #调用父类的方法
 c.setAttr(200)     #调用父类的方法
 c.getAttr()        #调用父类的方法  
 
+##########################################
+
+###重载方法
+# 如果你的父类方法的功能不能满足你的需求，你可以在子类重载你父类的方法
+###运算符重载
+'''
+class Vector:
+	def __init__(self,a,b):
+		self.a = a 
+		self.b = b
+		
+	def __str__(self):
+		return 'Vector (%d,%d)' % (self.a,self.b)
+		
+	def __add__(self):
+		return Vector(self.a + other.a, self.b + other.b)
+		
+v1 = Vector(2,10)
+v2 = Vector(5,-2)
+print v1+v2
+'''
+#隐藏数据：
+'''
+在python中实现数据隐藏很简单，不需要在前面加什么关键字，只要把类变量名
+或成员函数前面加两个下划线即可实现数据隐藏的功能，这样，对于类的实例来
+说，其变量名和成员函数是不能使用的，对于其类的继承类来说，也是隐藏的，
+这样，其继承类可以定义其一模一样的变量名或成员函数名，而不会引起命名冲
+突。
+'''
+class JustCounter:
+	__secretCount = 0
+	
+	def count(self):
+		self.__secretCount += 1
+		print self.__secretCount
+		
+counter = JustCounter()
+counter.count()
+counter.count()
+#print counter.__secretCount
+'''
+Python不允许实例化的类访问隐藏数据，但你可以使用
+object._className__attrName访问属性，将如下代码替
+换以上代码的最后一行代码：
+'''
+print counter._JustCounter__secretCount
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

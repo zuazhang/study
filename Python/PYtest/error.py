@@ -78,6 +78,7 @@ except IOError:
 '''
 #以下为单个异常的实例
 #在这里定义一个函数
+'''
 def temp_convert(var):
 	try:
 		return int(var)
@@ -85,6 +86,61 @@ def temp_convert(var):
 		print "the argument does not contain numbers\n",Argument
 #调用函数
 temp_convert("xyz");
+'''
+
+#触发异常
+'''
+我们可以使用raise语句自己触发异常
+一个异常可以是一个字符串，类或者对象。python内核提供的异常，大多数是实例化的类
+这是一个类的实例参数
+'''
+#定义一个异常
+def functionName(level):
+	if level < 1:
+		raise "Invalid level !",level
+'''
+注意：为了能够捕获异常，except语句必须用相同的异常来抛出类对象或者字符串
+例如我们捕获以上异常
+except "Invalid level !":
+
+'''
+
+
+#用户自定义异常
+'''
+通过创建一个新的异常类，程序可以命名他们自己的异常类。
+异常应该是典型的继承自Exception类，通过直接或间接的方式
+
+以下为与RuntimeError相关的实例，实例中创建了一个类，基类为
+RuntimeError用于在异常触发时输出更多的信息
+
+在try语句中，用户自定义的异常后执行except语句，变量e是用于创建
+Networkerror类的实例
+'''
+class Networkerror(RuntimeError):
+	def _init_(self,arg):
+		self.args = arg
+#触发该异常
+try:
+	raise Networkerror("Bad hostname")
+except Networkerror,e:
+	print e.args
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -109,6 +109,54 @@ print "Employee2.__dict__: ",Employee2.__dict__
 总量很大（及未通过引用计数销毁的那些）的对象。 在这种情况下，解释器会
 暂停下来，试图清理所有未引用的循环。 
 '''
+#析构函数__del__,在对象消逝的时候被调用，当对象不再被使用时，方法运行
+class Point:
+	def __init__(self,x=0,y=0):
+		self.x = x
+		self.y = y 
+	def __del__(self):
+		class_name = self.__class__.__name__
+		print class_name,"destroyed"
+
+pt1 = Point()
+pt2 = pt1
+pt3 = pt2
+print id(pt1),id(pt2),id(pt3)#打印对象的id
+del pt1
+del pt2
+del pt3
+
+#类的继承
+class Parent:
+	parentAttr = 100 
+	def __int__(self):
+		print "Calling parent constructor"
+		
+	def parentMethod(self):
+		print "Calling parent method"
+	
+	def setAttr(self,attr):
+		Parent.parentAttr = attr
+		
+	def getAttr(self):
+		print "parent attribute :",Parent.parentAttr
+
+		
+class Child(Parent):
+	def __init__(self):
+		print "Calling child constructor"
+		
+	def childMethod(self):
+		print 'Calling child method'
+		
+c = Child()        #实例化子类
+c.childMethod()    #调用子类的方法
+c.parentMethod()   #调用父类的方法
+c.setAttr(200)     #调用父类的方法
+c.getAttr()        #调用父类的方法  
+
+
+
 
 
 

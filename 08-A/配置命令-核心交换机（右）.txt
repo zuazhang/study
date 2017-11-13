@@ -1,0 +1,281 @@
+
+
+system-view
+	sysname 510right
+
+	vlan 20
+	vlan 501
+	vlan 503
+	vlan 504
+	vlan 505
+	vlan 506
+	vlan 507
+	vlan 508
+	vlan 509
+	vlan 510
+	vlan 511
+		quit
+
+	int vlan 1
+		ip add 192.168.15.1 255.255.255.0 
+	int vlan 20
+		ip add 192.168.20.1 255.255.255.0
+	int vlan 501
+		ip add 192.168.1.1 255.255.255.128
+	int vlan 503
+		ip add 192.168.3.1 255.255.255.0
+	int vlan 504
+		ip add 192.168.0.1 255.255.255.0
+	int vlan 505
+		ip add 192.168.5.1 255.255.255.0
+	int vlan 506
+		ip add 192.168.6.1 255.255.255.0
+	int vlan 507
+		ip add 192.168.7.1 255.255.255.0
+	int vlan 508
+		ip add 192.168.8.1 255.255.255.0
+	int vlan 509
+		ip add 192.168.9.1 255.255.255.0
+	int vlan 510
+		ip add 192.168.10.1 255.255.255.0
+	int vlan 511 
+		ip add 192.168.11.1 255.255.255.0
+		quit	
+
+
+
+	dhcp enable
+
+	int vlan 1 
+		dhcp select global
+	int vlan 20
+		dhcp select global
+	int vlan 501
+		dhcp select global
+	int vlan 503
+		dhcp select global
+	int vlan 504
+		dhcp select global
+	int vlan 505
+		dhcp select global
+	int vlan 506
+		dhcp select global
+	int vlan 507
+		dhcp select global
+	int vlan 508
+		dhcp select global
+	int vlan 509
+		dhcp select global
+	int vlan 510
+		dhcp select global
+	int vlan 511 
+		dhcp select global
+		quit
+
+
+
+	ip pool vlan1
+		network 192.168.15.0 mask 255.255.255.0
+		dns-list 192.168.20.15 
+		gateway 192.168.15.1
+		excluded-ip-address 192.168.15.2 192.168.15.99
+		excluded-ip-address 192.168.15.201 192.168.15.254
+		quit
+
+	ip pool vlan20
+		network 192.168.20.0 mask 255.255.255.0
+		dns-list 192.168.20.15
+		gateway 192.168.20.1
+		quit
+
+	ip pool vlan501
+		network 192.168.1.0 mask 255.255.255.128
+		dns-list 192.168.20.15
+		gateway 192.168.1.1
+		quit
+
+	ip pool vlan503
+		network 192.168.3.0 mask 255.255.255.0
+		gateway 192.168.3.1
+		dns-list 192.168.20.15
+		excluded-ip-address 192.168.3.2 192.168.3.100
+		quit 
+
+	ip pool vlan504
+		network 192.168.0.0 mask 255.255.255.0
+		dns-list 192.168.20.15
+		gateway 192.168.0.1
+		excluded-ip-address 192.168.0.2 192.168.0.100
+		excluded-ip-address 192.168.0.253
+		quit
+
+	ip pool vlan505
+		network 192.168.5.0 mask 255.255.255.0
+		dns-list 192.168.20.15
+		gateway 192.168.5.1
+		excluded-ip-address 192.168.5.2 192.168.5.100
+		quit
+
+	ip pool vlan506
+		network 192.168.6.0 mask 255.255.255.0
+		dns-list 192.168.20.15
+		gateway 192.168.6.1
+		excluded-ip-address 192.168.6.2 192.168.6.100
+		quit
+
+	ip pool vlan507
+		network 192.168.7.0 mask 255.255.255.0
+		dns-list 192.168.20.15
+		gateway 192.168.7.1
+		quit
+
+	ip pool vlan508
+		network 192.168.8.0 mask 255.255.255.0
+		dns-list 192.168.20.15
+		gateway 192.168.8.1
+		excluded-ip-address 192.168.8.2 192.168.8.100
+		excluded-ip-address 192.168.8.250
+		quit
+
+	ip pool vlan509
+		network 192.168.9.0 mask 255.255.255.0
+		dns-list 192.168.20.15
+		gateway 192.168.9.1
+		excluded-ip-address 192.168.9.2 192.168.9.100
+		quit
+
+	ip pool vlan510
+		network 192.168.10.0 mask 255.255.255.0
+		dns-list 192.168.20.15
+		gateway 192.168.10.1
+		quit
+
+	ip pool vlan511
+		network 192.168.11.0 mask 255.255.255.0
+		dns-list 192.168.20.15
+		gateway 192.168.11.1
+		excluded-ip-address 192.168.11.2 192.168.11.100
+		quit
+	
+	lacp priority 100
+	
+	int Eth-trunk 1 
+		port link-type trunk
+		port trunk allow-pass vlan all
+		max bandwidth-affected-linknumber 2 
+		mode lacp
+		quit
+		
+
+	int gi 0/0/1
+		port link-type access
+		port default vlan 501
+		quit
+
+	int gi 0/0/13
+		port link-type access
+		port default vlan 1
+
+	port-group 1
+		group-member gi 0/0/2 to g0/0/12
+		port link-type trunk
+		port trunk allow-pass vlan all
+		quit
+	undo port-group 1
+
+	port-group 510
+		group-member gi 0/0/14 to g0/0/20
+		port link-type access
+		port default vlan 510
+		quit
+	undo port-group 510
+
+	int gi 0/0/21
+		port link-type trunk
+		port trunk allow-pass vlan all
+		quit
+	
+	int gi 0/0/22
+		port link-type trunk
+		port trunk allow-pass vlan all
+		quit
+		
+	int gi 0/0/23
+		Eth-trunk 1
+		lacp priority 100
+		quit
+		
+	int gi 0/0/24
+		Eth-trunk 1
+		lacp priority 100
+		quit
+	
+
+
+
+	ospf 100
+		area 0
+			network 192.168.0.0 0.0.0.255
+			network 192.168.1.0 0.0.0.255
+			network 192.168.3.0 0.0.0.255
+			network 192.168.5.0 0.0.0.255
+			network 192.168.6.0 0.0.0.255
+			network 192.168.7.0 0.0.0.255
+			network 192.168.8.0 0.0.0.255
+			network 192.168.9.0 0.0.0.255
+			network 192.168.10.0 0.0.0.255
+			network 192.168.11.0 0.0.0.255
+			network 192.168.15.0 0.0.0.255
+			network 192.168.20.0 0.0.0.255
+			quit
+		silent-interface vlan 503
+		silent-interface vlan 504
+		silent-interface vlan 505
+		silent-interface vlan 506
+		silent-interface vlan 507
+		silent-interface vlan 508
+		silent-interface vlan 509
+		silent-interface vlan 511
+		quit
+
+
+
+
+	
+	aaa
+		authentication-scheme default
+			quit
+			
+		authorization-scheme default
+			quit
+		accounting-scheme default
+			quit
+		local-user admin password cipher redhat19831122
+		local-user admin service-type ssh
+		local-user admin privilege level 15
+		quit	
+	stelnet server enable
+	ssh user admin 
+	ssh user admin authentication-type password
+	ssh user admin service-type all
+	user-interface vty 0 4
+		authentication-mode aaa
+		protocol inbound ssh
+		quit
+	user-interface console 0
+		idle-timeout 0 0 
+		quit
+	
+	
+
+
+	quit
+save
+y
+
+
+
+
+
+
+

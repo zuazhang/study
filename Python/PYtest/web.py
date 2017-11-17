@@ -5,4 +5,4 @@ url = 'http://www.baidu.com'
 r = urllib.urlopen(url)
 #print r.read()
 #urllib.urlretrieve()ÏÂÔØ·½·¨
-urllib.urlretrieve('http://labfile.oss.aliyuncs.com/courses/761/w8ay_1.zip',filename='F:/git/demo1/Python/PYtest/baidu.zip')
+#urllib.urlretrieve('http://labfile.oss.aliyuncs.com/courses/761/w8ay_1.zip',filename='F:/git/demo1/Python/PYtest/baidu.zip')

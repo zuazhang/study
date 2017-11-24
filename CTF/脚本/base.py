@@ -19,10 +19,10 @@ def decode(str):
 	print "base16 decode : "+c
 
 def choice_1():
-	s = raw_input("please input the string what you want to encode:")
+	s = str(raw_input("please input the string what you want to encode:"))
 	encode(s)
 def choice_2():
-	s = raw_input("please input the Base_string what you want to decode:")
+	s = str(raw_input("please input the Base_string what you want to decode:"))
 	decode(s)
 print "please choice the option :\n1.encode the String\n2.decode the Base_string\n"
 n = int(raw_input("please choice:"))

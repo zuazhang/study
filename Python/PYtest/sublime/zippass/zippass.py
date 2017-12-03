@@ -1,4 +1,4 @@
-# -*-coding:utf-8-*-
+# -*-coding: utf-8 -*-
 import zipfile
 import optparse
 from threading import Thread
@@ -17,7 +17,7 @@ def extractFile(zFile,password):
 		zFile.extractall(pwd=password)
 		print("Found Password:",password)
 		#event.set()
-		return password
+		#return password
 	except:
 		#event.wait()
 		pass

@@ -45,7 +45,7 @@ screenLock = Semaphore(value=1)
 def connScan(tgtHost, tgtPort):
 	try:
 		connSkt = socket(AF_INET, SOCK_STREAM)
-		connSkt.connect((tgtHost, tgtPort))
+		connSkt.connect((tgtHost,tgtPort))
 		#向端口发送数据串并等待回应
 		connSkt.send('ViolentPython\r\n')
 		results = connSkt.recv(100)

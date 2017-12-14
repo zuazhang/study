@@ -1,28 +1,62 @@
 # -*- coding: utf-8 -*- 
 
 import socket
+from threading import *
 
-tgthost = raw_input("Please enter the hosts you want to scan:");
-hosts = []
-for i in tgthost.split(','):
-	hosts.append(str(i))
+screenLock = Semaphore(value=1)
 
-ports = [20,21,22,23,80,135,445,443,3389,8080]
+
+s = socket.socket()
+
+def portScan(host,ports):
+	try:
+		tgtIP = socket.gethostbyname(host)
+	except:
+		print "[-] Cannot Resolve'%s': Unknown host"% host
+		return
+	try:
+		tgtName = socket.gethostbyaddr(tgtIP)
+		print '\n[+] Scan Results for: '+ tgtNmae[0]
+	except:
+		print '\n[+] Scan Results for: '+ tgtIP
+	socket.setdefaulttimeout(1)
+	for port in ports:
+		t = Thread(target=Scanner,args=(host,int(port)))
+		t.start()
+
+
 
 def Scanner(host,port):
 	try:
 		print "[+] Connecting to " +host+":" + str(port)
-		s = socket(AF_INET, SOCK_STREAM)
+		
 		s.connect((host,port))
 		s.send('Primal Security \n')
 		banner = s.recv(1024)
+		screenLock.acquire()
 		if banner:
-			print "[+]Port" + str(port) + "open: "+str(banner)
+			print "[+]Port" + str(port) + "open: "
+			print "[+]>>>"+str(banner)
+		
+	except:
+		screenLock.acquire()
+		print "[-]Port" + str(port) + "closed\n"
+	finally:
+		screenLock.release()
 		s.close()
-	except:pass
+
+def main():
 
 
+	tgthost = raw_input("Please enter the hosts you want to scan:");
+	hosts = []
+	for i in tgthost.split(','):
+		hosts.append(str(i))
 
-for host in hosts:
-	for port in ports:
-		Scanner(host,port)
+	ports = [20,21,22,23,80,135,445,443,3389,8080]
+	for host in hosts:
+		portScan(host,ports)
+
+if __name__ == '__main__':
+	main()
+

@@ -3,10 +3,11 @@
 import socket
 from threading import *
 
+
+
+
 screenLock = Semaphore(value=1)
 
-
-s = socket.socket()
 
 def portScan(host,ports):
 	try:
@@ -29,15 +30,15 @@ def portScan(host,ports):
 def Scanner(host,port):
 	try:
 		print "[+] Connecting to " +host+":" + str(port)
-		
+		s = socket.socket()
 		s.connect((host,port))
 		s.send('Primal Security \n')
 		banner = s.recv(1024)
-		screenLock.acquire()
 		if banner:
+			screenLock.acquire()
 			print "[+]Port" + str(port) + "open: "
 			print "[+]>>>"+str(banner)
-		
+		s.close()	
 	except:
 		screenLock.acquire()
 		print "[-]Port" + str(port) + "closed\n"

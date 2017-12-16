@@ -17,9 +17,9 @@ def portScan(host,ports):
 		return
 	try:
 		tgtName = socket.gethostbyaddr(tgtIP)
-		print '\n[+] Scan Results for: '+ tgtNmae[0]
+		print '\n[+] Scan Results for: '+ tgtNmae[0]+'...........'
 	except:
-		print '\n[+] Scan Results for: '+ tgtIP
+		print '\n[+] Scan Results for: '+ tgtIP+'...........'
 	socket.setdefaulttimeout(1)
 	for port in ports:
 		t = Thread(target=Scanner,args=(host,int(port)))
@@ -29,21 +29,23 @@ def portScan(host,ports):
 
 def Scanner(host,port):
 	try:
-		print "[+] Connecting to " +host+":" + str(port)
+
 		s = socket.socket()
 		s.connect((host,port))
 		s.send('Primal Security \n')
 		banner = s.recv(1024)
-		if banner:
-			screenLock.acquire()
-			print "[+]Port" + str(port) + "open: "
-			print "[+]>>>"+str(banner)	
+
+		screenLock.acquire()
+		print "[+] Connecting to " +host+":" + str(port)
+		print "[+]Port" + str(port) + "open: "
+		print "[+]>>>\n"+str(banner)
+		screenLock.release()
+		s.close()	
 	except:
 		screenLock.acquire()
+		print "[+] Connecting to " +host+":" + str(port)
 		print "[-]Port" + str(port) + "closed\n"
-	finally:
 		screenLock.release()
-		s.close()
 
 def main():
 	tgthost = raw_input("Please enter the hosts you want to scan:");

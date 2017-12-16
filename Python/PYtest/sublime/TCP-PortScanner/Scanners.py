@@ -29,26 +29,25 @@ def portScan(host,ports):
 
 def Scanner(host,port):
 	try:
-		screenLock.acquire()
-		print "[+] Connecting to " +host+":" + str(port)
+
 		s = socket.socket()
 		s.connect((host,port))
 		s.send('Primal Security \n')
 		banner = s.recv(1024)
 		if banner:
+			screenLock.acquire()
+			print "[+] Connecting to " +host+":" + str(port)
 			print "[+]Port" + str(port) + "open: "
-			print "[+]>>>"+str(banner)
-		s.close()	
+			print "[+]>>>"+str(banner)	
 	except:
 		screenLock.acquire()
+		print "[+] Connecting to " +host+":" + str(port)
 		print "[-]Port" + str(port) + "closed\n"
 	finally:
 		screenLock.release()
-
+		s.close()
 
 def main():
-
-
 	tgthost = raw_input("Please enter the hosts you want to scan:");
 	hosts = []
 	for i in tgthost.split(','):

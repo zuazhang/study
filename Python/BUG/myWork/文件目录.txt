@@ -1,0 +1,5 @@
+/w8ay.py  //项目启动主文件
+/lib/core //核心文件存放目录
+/lib/core/config.py //配置文件
+/script //插件存放
+/exp //exp和poc存放

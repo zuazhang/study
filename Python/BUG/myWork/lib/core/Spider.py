@@ -1,11 +1,12 @@
 # -*-coding: utf-8 -*-
 
 from lib.core import Downloader,UrlManager
+from script import sqlcheck
 import threading
 from urlparse import urljoin
 from bs4 import BeautifulSoup
 
-class SpideMain(object):
+class SpiderMain(object):
 	def __int__(self,root,threadNum):
 		self.urls = UrlManager.UrlManager()
 		self.download = Downloader.Downloader()
@@ -46,6 +47,13 @@ class SpideMain(object):
 				new_url = self.urls.get_new_url()
 
 				## sql check
+				try:
+					if(sqlcheck.sqlcheck(new_url)):
+						print("url:%s sqlcheck is valueable"%new_url)
+				except:
+					pass
+
+
 				print "craw:"+ new_url
 				t =threading.Thread(target = self.download.download,args = (new_url,_content))
 				t.start()

@@ -5,6 +5,8 @@ from script import sqlcheck
 import threading
 from urlparse import urljoin
 from bs4 import BeautifulSoup
+import plugin
+
 
 class SpiderMain(object):
 	def __init__(self,root,threadNum):
@@ -64,5 +66,10 @@ class SpiderMain(object):
 				if _str is None:
 					continue
 				new_urls = self._parse(new_url,_str["html"])
+				
+				disallow = ['sqlcheck']
+				_plugin = plugin.spiderplus("script",disallow)
+				_plugin.work(_str["url"],_str["html"])
+
 				self.urls.add_new_urls(new_urls)
 

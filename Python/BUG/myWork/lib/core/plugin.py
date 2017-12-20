@@ -24,3 +24,11 @@ class spiderplus(object):
 		return list(dir_exploit)
 
 	def work(self,url,html):
+		for _plugin in self.list_plusg():
+			try:
+				m = __import__(_plugin.split('.')[0])
+				spider = getattr(m,'spider')
+				p = spider()
+				s = p.run(url,html)
+			except Exception,e:
+				print e

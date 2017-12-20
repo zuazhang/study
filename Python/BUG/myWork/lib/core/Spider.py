@@ -7,13 +7,13 @@ from urlparse import urljoin
 from bs4 import BeautifulSoup
 
 class SpiderMain(object):
-	def __int__(self,root,threadNum):
+	def __init__(self,root,threadNum):
 		self.urls = UrlManager.UrlManager()
 		self.download = Downloader.Downloader()
 		self.root = root
 		self.threadNum = threadNum
 
-	def _judge(slef,domain,url):
+	def _judge(self, domain, url):
 		if (url.find(domain) != -1):
 			return True
 		else:
@@ -26,7 +26,7 @@ class SpiderMain(object):
 		_news = self._get_new_urls(page_url,soup)
 		return _news
 
-	def _get_new_urls(slef,page_url,soup):
+	def _get_new_urls(self, page_url, soup):
 		new_urls = set()
 		links = soup.find_all('a')
 		for link in links:
@@ -54,15 +54,15 @@ class SpiderMain(object):
 					pass
 
 
-				print "craw:"+ new_url
+				print("craw:"+ new_url)
 				t =threading.Thread(target = self.download.download,args = (new_url,_content))
 				t.start()
-				th.appenf(t)
+				th.append(t)
 			for t in th:
 				t.join()
 			for _str in _content:
 				if _str is None:
 					continue
-				new_urls = self.parse(new_url,_str["html"])
-				self.url.add_new_urls(new_urls)
+				new_urls = self._parse(new_url,_str["html"])
+				self.urls.add_new_urls(new_urls)
 

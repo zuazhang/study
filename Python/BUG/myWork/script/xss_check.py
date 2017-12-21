@@ -2,6 +2,8 @@
 
 from lib.core import Downloader,common
 import sys,os
+
+
 payload = []
 filename = os.path.join(sys.path[0],"data","xss.txt")
 f = open(filename)
@@ -23,7 +25,7 @@ class spider():
 				_str = download.get(_url)
 				if _str is None:
 					return False
-				if(_str.find(_payload)!= -1):
+				if(_str.find(_payload)!=-1):
 					print "xss found:%s"%url
 		return False
 		

@@ -13,11 +13,11 @@ def urlsplit(url):
 	_url = url.split("?")[-1]
 	pararm = {}
 	for val in _url.split("&"):
-		pararm[val.split("=")[0]] = vla.split("=")[-1]
+		pararm[val.split("=")[0]] = val.split("=")[-1]
 
 	#combine
 	urls = []
-	for vla in pararm.values():
-		new_url = domain + _url.replace(vla,"my_Payload")
+	for val in pararm.values():
+		new_url = domain + _url.replace(val,"my_Payload")
 		urls.append(new_url)
 	return urls

@@ -6,11 +6,11 @@ reload(sys)
 sys.setdefaultencoding('utf-8')
 
 def main():
-	root = "https://blog.yesfree.pw/"
+	root = "http://www.shiyanlou.com/"
 	threadNum = 10
 	#webcms
-	ww = webcms.webcms(root,threadNum)
-	ww.run()
+	#ww = webcms.webcms(root)
+	#ww.run()
 
 	#spider
 	w = SpiderMain(root,threadNum)

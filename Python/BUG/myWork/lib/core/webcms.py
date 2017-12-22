@@ -1,6 +1,6 @@
 # -*-coding: utf-8 -*-
 import json,os,sys,hashlib,threading,Queue
-from lib.core import Download
+from lib.core import Downloader
 
 class webcms(object):
 	workQueue = Queue.Queue()
@@ -43,7 +43,7 @@ class webcms(object):
 			if (html.find(cms["re"])!=-1):
 				self.result = cms["name"]
 				self.NotFound = False
-				retunr True
+				return True
 		else:
 			md5 = self.getmd5(html)
 			if(md5 == cms["md5"]):

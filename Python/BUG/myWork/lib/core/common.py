@@ -8,6 +8,11 @@
 替换这个参数就行了
 
 '''
+import urlparse
+import socket
+
+
+
 def urlsplit(url):
 	domain = url.split("?")[0]
 	_url = url.split("?")[-1]
@@ -21,3 +26,14 @@ def urlsplit(url):
 		new_url = domain + _url.replace(val,"my_Payload")
 		urls.append(new_url)
 	return urls
+
+def gethostbyname(url):
+	doamin = urlparse.urlparse(url)
+	#domain.netloc
+	if comain.netloc is None:
+		return None
+
+	ip = socket.gethostbyname(domain.netloc)
+	return ip
+
+

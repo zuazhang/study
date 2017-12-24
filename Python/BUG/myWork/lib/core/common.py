@@ -28,9 +28,9 @@ def urlsplit(url):
 	return urls
 
 def gethostbyname(url):
-	doamin = urlparse.urlparse(url)
+	domain = urlparse.urlparse(url)
 	#domain.netloc
-	if comain.netloc is None:
+	if domain.netloc is None:
 		return None
 
 	ip = socket.gethostbyname(domain.netloc)

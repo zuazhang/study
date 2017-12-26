@@ -35,5 +35,10 @@ def gethostbyname(url):
 
 	ip = socket.gethostbyname(domain.netloc)
 	return ip
-
+def GetMiddleStr(content,startStr,endStr):
+    startIndex = content.index(startStr)
+    if startIndex>=0:
+        startIndex += len(startStr)
+    endIndex = content.index(endStr)
+    return content[startIndex:endIndex]
 

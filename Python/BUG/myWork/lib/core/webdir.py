@@ -4,6 +4,8 @@ import sys
 import Queue
 import requests
 import threading
+from lib.core import outputer
+output = outputer.outputer()
 class webdir:
 	def __init__(self,root,threadNum):
 		self.root = root
@@ -33,8 +35,9 @@ class webdir:
 		while not self.task.empty():
 			url = self.task.get()
 			s_code = self.checkdir(url)
-			if s_code == 200:
+			if s_code != 404:
 				self.s_list.append(url)
+				output.add_list("web_path",url)
 			print "Testing : %s status: %s"%(url,s_code)
 
 	def work(self):
@@ -50,7 +53,7 @@ class webdir:
 	def output(self):
 		if len(self.s_list):
 			print "[*] status =  200 dir:"
-			for url in s_list:
+			for url in self.s_list:
 				print url
 
 

@@ -41,4 +41,9 @@ def GetMiddleStr(content,startStr,endStr):
         startIndex += len(startStr)
     endIndex = content.index(endStr)
     return content[startIndex:endIndex]
-
+def codog_urlparse(url):
+    domain = urlparse.urlparse(url)
+    # domain.netloc
+    if domain.netloc is None:
+        return None
+    return domain.netloc

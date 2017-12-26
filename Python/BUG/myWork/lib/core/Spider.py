@@ -1,11 +1,14 @@
 # -*-coding: utf-8 -*-
 
-from lib.core import Downloader,UrlManager
+from lib.core import Downloader,UrlManager,outputer,common
 from script import sqlcheck
 import threading
 from urlparse import urljoin
 from bs4 import BeautifulSoup
 import plugin
+
+output = outputer.outputer()
+
 
 
 class SpiderMain(object):
@@ -57,6 +60,8 @@ class SpiderMain(object):
 
 
 				print("craw:"+ new_url)
+				output.add_list("path_craw",new_url)
+				output.build_html(common.codog_urlparse(self.root))
 				t =threading.Thread(target = self.download.download,args = (new_url,_content))
 				t.start()
 				th.append(t)

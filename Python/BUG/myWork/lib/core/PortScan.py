@@ -2,9 +2,12 @@
 import socket
 import threading
 import Queue
+from lib.core import outputer
+output = outputer.outputer()
+
 
 class PortScan:
-	def __init__(self,ip = "localhost",threadNum = 5):
+	def __init__(self,ip = "localhost",threadNum = 10):
 		self.PORT = {
 		80:"web",
 		8080:"web",
@@ -75,8 +78,10 @@ class PortScan:
 			try:
 				s.connect((self.ip,port))
 				print "%s:%s OPEN [%s]"%(self.ip,port,self.PORT[port])
+				output.add_list("PortScan","%s:%s OPEN [%s]"%(self.ip,port,self.PORT[port]))
 			except:
 				print "%s:%s Close"%(self.ip,port)
+				output.add_list("PortScan","%s:%s Close"%(self.ip,port))
 			finally:
 				s.close()
 

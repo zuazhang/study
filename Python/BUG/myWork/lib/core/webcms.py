@@ -1,6 +1,9 @@
 # -*-coding: utf-8 -*-
 import json,os,sys,hashlib,threading,Queue
-from lib.core import Downloader
+from lib.core import Downloader,outputer
+
+output = outputer.outputer()
+
 
 class webcms(object):
 	workQueue = Queue.Queue()
@@ -62,8 +65,12 @@ class webcms(object):
 				t.join()
 		if(self.result):
 			print "[webcms]:%s cms is %s"% (self.URL,self.result)
+			output.add_list("WebCms","[webcms]:%s cms is %s"% (self.URL,self.result))
+
 		else:
 			print "[webcms]:%s cms NOYFound !!!!"% self.URL
+			output.add_list("WebCms","[webcms]:%s cms NOTFound !!!!"% self.URL)
+
 
 
 

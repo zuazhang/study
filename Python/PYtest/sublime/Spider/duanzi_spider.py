@@ -24,6 +24,30 @@ class Spider:
 		item_list = pattern.findall(html)
 
 		return item_list
+	def printOnePage(self,item_list,page):
+		'''
+		@brief 处理得到的段子列表
+		@param item_list 得到的段子列表
+		@param page 	 处理第几页
+		'''
+		print "*******第%d页爬取完毕...*******"%page
+		for item in item_list:
+			print "================"
+			item = item.replace("<p>","").replace("</p>","").replace("</br>","")
+			self.writeFile(item)
+	def writeFile(self,text):
+		'''
+		@brief 将数据追加写进文本
+		@param text 文件内容
+		'''
+		myFile = open("./MyStory.txt",'a')#追加形式打开文件
+		myFile.write(text)
+		myFile.write("-------------------------------------")
+		myFile.close()
+
+
+
+
 
 if __name__ == '__main__':
 	print '''

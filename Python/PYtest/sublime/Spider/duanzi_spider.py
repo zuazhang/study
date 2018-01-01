@@ -7,6 +7,11 @@ class Spider:
 	'''
 	内涵段子爬虫类
 	'''
+	def __init__(self):
+		#在这里定义爬虫类所需要的基本属性
+		self.enable = True #是否继续加载页面
+		self.page = 1      #当前应该爬第几章页面
+
 	def loadPage(self,page):
 		'''
 		@brief 定义一个url请求
@@ -45,6 +50,27 @@ class Spider:
 		myFile.write("-------------------------------------")
 		myFile.close()
 
+	def doWork(self):
+		'''
+		让爬虫开始工作
+		'''
+		while self.enable:
+			try:
+				item_list = self.loadPage(self.page)
+			except urllib2.URLError,e:
+				print e.reason
+				continue
+			#对得到的item_list处理
+			self.printOnePage(item_list,self.page)
+			self.page += 1
+			print "按回车继续..."
+			print "输入quit退出"
+			command = raw_input()
+			if (command == "quit"):
+				self.enable = False
+				break
+
+
 
 
 
@@ -60,7 +86,7 @@ if __name__ == '__main__':
 
 	#定义一个spider对象
 	mySpider = Spider()
-	mySpider.loadPage(1)
+	mySpider.doWork()
 
 
 

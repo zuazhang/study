@@ -39,13 +39,13 @@ class Spider:
 		for item in item_list:
 			#print "================"
 			item = item.replace("<p>","").replace("</p>","").replace("</br>","")
-			self.writeFile(item)
-	def writeFile(self,text):
+			self.writeToFile(item)
+	def writeToFile(self,text):
 		'''
 		@brief 将数据追加写进文本
 		@param text 文件内容
 		'''
-		myFile = open("./MyStory.txt",'a')#追加形式打开文件
+		myFile = open("MyStory.txt",'a')#追加形式打开文件
 		myFile.write(text)
 		myFile.write("-------------------------------------")
 		myFile.close()

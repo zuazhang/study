@@ -22,7 +22,7 @@ class Spider:
 		user_agent = 'Mozilla/5.0 (compatible; MSIE 9.0; Windows NT6.1; Trident/5.0'
 		headers = {'User-Agent' : user_agent}
 		req = urllib2.Request(url,headers = headers)
-		response = urllib2.urlopen(url)
+		response = urllib2.urlopen(req)
 		html = response.read()
 		#gbk_html = html.decode('gbk').encode('utf-8')
 		pattern = re.compile(r'<div>.*?class="f18 mb20">(.*?)</div>',re.S)
@@ -37,7 +37,7 @@ class Spider:
 		'''
 		print "*******第%d页爬取完毕...*******"%page
 		for item in item_list:
-			print "================"
+			#print "================"
 			item = item.replace("<p>","").replace("</p>","").replace("</br>","")
 			self.writeFile(item)
 	def writeFile(self,text):

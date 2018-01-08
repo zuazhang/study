@@ -35,10 +35,11 @@ class Spider:
 		@param item_list 得到的段子列表
 		@param page 	 处理第几页
 		'''
-		print "*******第%d页爬取完毕...*******"%page
+		print u"*******第%d页爬取完毕...*******"%page
 		for item in item_list:
 			#print "================"
 			item = item.replace("<p>","").replace("</p>","").replace("</br>","")
+			print item
 			self.writeToFile(item)
 	def writeToFile(self,text):
 		'''
@@ -63,8 +64,8 @@ class Spider:
 			#对得到的item_list处理
 			self.printOnePage(item_list,self.page)
 			self.page += 1
-			print "按回车继续..."
-			print "输入quit退出"
+			print u"按回车继续..."
+			print u"输入quit退出"
 			command = raw_input()
 			if (command == "quit"):
 				self.enable = False
@@ -76,7 +77,7 @@ class Spider:
 
 
 if __name__ == '__main__':
-	print '''
+	print u'''
 	=========================
 		内涵段子小爬虫
 	=========================

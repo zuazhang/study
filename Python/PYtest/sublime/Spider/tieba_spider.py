@@ -10,10 +10,7 @@ def load_page(url):
 
 def tieba_spider(url,begin_page,end_page):
 	user_agent = 'Mozilla/5.0 (compatible; MSIE 9.0; Windows NT6.1; Trident/5.0;'
-	headers = {
-				'User_Agent':user_agent
-
-	}
+	headers = {'User_Agent':user_agent}
 
 	for i in range(begin_page,end_page+1):
 		pn = 50 *(i-1)

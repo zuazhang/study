@@ -29,9 +29,9 @@ class Spider:
 		#gbk_html = html.decode('gbk').encode('utf-8')
 		pattern = re.compile(r'<div>.*?class="f18 mb20">(.*?)</div>',re.S)
 		item_list = pattern.findall(html)
-
+		print item_list
 		return item_list
-		#print item_list
+		
 	def printOnePage(self,item_list,page):
 		'''
 		@brief 处理得到的段子列表
@@ -41,7 +41,7 @@ class Spider:
 		print u"*******第%d页爬取完毕...*******"%page
 		for item in item_list:
 			print "================"
-			item = item.replace("<p>","").replace("</p>","").replace("</br>","")
+			item = item.replace("<p>","").replace("</p>","").replace("<br />","")
 			print item
 			self.writeToFile(item)
 	def writeToFile(self,text):

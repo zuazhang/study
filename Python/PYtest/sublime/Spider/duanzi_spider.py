@@ -42,7 +42,7 @@ class Spider:
 		for item in item_list:
 			print "================"
 			item = item.replace("<p>","").replace("&hellip;","").replace("&rdquo;","").replace("&ldquo;","").replace("</p>","").replace("<br />","")
-			print item
+			#print item
 			self.writeToFile(item)
 	def writeToFile(self,text):
 		'''

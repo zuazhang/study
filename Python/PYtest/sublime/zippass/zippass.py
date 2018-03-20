@@ -15,11 +15,13 @@ def extractFile(zFile,password):
 	#如果口令正确，输出口令，如果错误，抛出异常并测试下一个口令
 	try:
 		zFile.extractall(pwd=password)
+
 		print("Found Password:",password)
 		#event.set()
 		#return password
 	except:
 		#event.wait()
+		print password
 		pass
 
 
